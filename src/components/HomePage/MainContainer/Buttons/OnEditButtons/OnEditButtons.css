@@ -1,0 +1,22 @@
+.EditButtons {
+	display: flex;
+	margin-left: auto;
+	z-index: 10;
+}
+
+.EditButtons button {
+	background: var(--secundary-bg);
+	border-radius: 10px;
+	padding: 0 10px 0 15px;
+	outline: none;
+	border: none;
+	font-size: 1em;
+	font-weight: 600;
+	color: var(--inactive-fg);
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.EditButtons button:hover {
+	color: var(--active-fg);
+}

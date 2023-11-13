@@ -1,0 +1,136 @@
+.HomeChildContainer.Dashboard {
+	background: none;
+	border: none;
+	gap: 25px;
+	overflow-y: auto;
+}
+
+.DashboardContainer {
+	background: var(--secundary-bg);
+	border-radius: 25px;
+	filter: drop-shadow(0px 5px 1px rgba(0, 0, 0, 0.05));
+}
+
+.HomeTitle {
+	margin-top: 10px;
+}
+
+.ActionsContainer > div {
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	flex-direction: row;
+	gap: 40px;
+	padding: 25px 35px 25px 35px;
+	align-items: center;
+	justify-content: center;
+}
+
+.RoundedRect.ImageButton {
+	position: relative;
+	overflow: hidden;
+	flex-basis: calc(50% - 20px);
+	height: 150px;
+	width: 100%;
+	margin: unset;
+	padding: unset;
+	transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+	color: #cfcfcf;
+}
+
+.RoundedRect.ImageButton::before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(0deg, rgba(0, 0, 0) -15px, transparent 65%);
+}
+
+.RoundedRect.ImageButton:hover {
+	scale: 1.05;
+	color: #ffffff;
+}
+
+.RoundedRect.ImageButton .imageTextContainer {
+	width: 100%;
+}
+
+.RoundedRect.ImageButton .imageTextContainer img {
+	border-radius: inherit;
+	width: 100%;
+	display: block;
+}
+
+.RoundedRect.ImageButton .imageTextContainer div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	padding-left: 20px;
+	padding-bottom: 10px;
+}
+
+.RoundedRect.ImageButton > div > div h4 {
+	align-self: end;
+}
+
+.SecondRow > .RoundedRect.ImageButton {
+	flex-basis: calc(32% - 20px);
+	display: flex;
+}
+
+.SecondRow > .RoundedRect.ImageButton img {
+	width: 100%;
+	align-self: center;
+}
+.SecondRow > .RoundedRect.ImageButton:nth-child(1) img {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.SecondRow > .RoundedRect.ImageButton:nth-child(2) img {
+	height: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	align-self: center;
+}
+.SecondRow > .RoundedRect.ImageButton {
+	background: white;
+	opacity: 0.5;
+}
+.SecondRow > .RoundedRect.ImageButton:hover {
+	opacity: 1;
+}
+
+.SecondRow > .RoundedRect.ImageButton::before {
+	background: unset;
+}
+
+.Icon {
+	font-size: 5em;
+	position: absolute;
+	transform-origin: center;
+}
+
+@media only screen and (max-width: 768px) {
+	.imageTextContainer h4 {
+		font-size: 1.2em;
+		line-height: normal;
+		text-align: start;
+	}
+
+	.RoundedRect.ImageButton {
+		height: 100px;
+	}
+
+	.RoundedRect.ImageButton .imageTextContainer img {
+		object-fit: fill;
+	}
+
+	.RoundedRect.ImageButton .imageTextContainer .Image2 {
+		width: 120%;
+	}
+}

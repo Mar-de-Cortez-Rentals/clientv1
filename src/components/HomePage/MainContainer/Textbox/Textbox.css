@@ -1,0 +1,19 @@
+.Textbox {
+	background: var(--secundary-bg);
+	border-radius: 20px;
+	border: none;
+	outline: none;
+	height: fit-content;
+	padding: 0 10px 0 10px;
+	line-height: unset;
+}
+
+.Textbox:active {
+	color: var(--active-fg);
+}
+
+@media screen and (max-width: 768px) {
+	.Textbox {
+		width: 100%;
+	}
+}

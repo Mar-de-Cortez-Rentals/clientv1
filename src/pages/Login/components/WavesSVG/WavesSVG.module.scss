@@ -1,0 +1,150 @@
+.SVG {
+	position: absolute;
+	height: calc(80vh + 70vw);
+	width: calc(80vh + 70vw);
+	//transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+
+	--animation-duration: 20s;
+}
+
+.TopCircle {
+	--TopWave-position: calc(-85% + 50vw), -60%;
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+	translate: calc(-85% + 50vw) -60%;
+
+	z-index: 3;
+	animation: TopWave var(--animation-duration) linear 0s forwards;
+}
+
+.MiddleCircle {
+	--MiddleWave-position: calc(-105% + 50vw), -50%;
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+	translate: calc(-105% + 50vw) -50%;
+
+	z-index: 2;
+	animation: MiddleWave var(--animation-duration) linear 0s forwards;
+}
+
+.BottomCircle {
+	--BottomWave-position: calc(-95% + 50vw), -50%;
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+	translate: calc(-95% + 50vw) -50%;
+
+	z-index: 1;
+	animation: BottomWave var(--animation-duration) linear 0s forwards;
+}
+
+@keyframes TopWave {
+	0% {
+		transform: rotateZ(360deg);
+	}
+	100% {
+		transform: rotateZ(0deg);
+	}
+}
+
+@keyframes MiddleWave {
+	0% {
+		transform: rotateZ(360deg);
+	}
+	100% {
+		transform: rotateZ(0deg);
+	}
+}
+
+@keyframes BottomWave {
+	0% {
+		transform: rotateZ(0deg);
+	}
+	100% {
+		transform: rotateZ(360deg);
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.TopCircle {
+		translate: calc(-30%) -78%;
+		animation: TopWaveMobile 100s linear 0s forwards infinite !important;
+	}
+
+	.MiddleCircle {
+		translate: calc(-30%) -80%;
+		animation: MiddleWaveMobile 200s linear 0s forwards infinite !important;
+	}
+
+	.BottomCircle {
+		translate: calc(-30%) -72%;
+		animation: BottomWaveMobile 400s linear 0s forwards infinite !important;
+	}
+
+	@keyframes TopWaveMobile {
+		0% {
+			transform: rotateZ(0deg);
+		}
+		100% {
+			transform: rotateZ(360deg);
+		}
+	}
+
+	@keyframes MiddleWaveMobile {
+		0% {
+			transform: rotateZ(360deg);
+		}
+		100% {
+			transform: rotateZ(0deg);
+		}
+	}
+
+	@keyframes BottomWaveMobile {
+		0% {
+			transform: rotateZ(0deg);
+		}
+		100% {
+			transform: rotateZ(360deg);
+		}
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.TopCircle.ShowRegister {
+		translate: calc(-45% + 50vw) -35%;
+		rotate: 90deg;
+	}
+
+	.MiddleCircle.ShowRegister {
+		translate: calc(-65% + 50vw) -35%;
+		rotate: 0deg;
+	}
+
+	.BottomCircle.ShowRegister {
+		translate: calc(-50% + 50vw) -35%;
+		rotate: 90deg;
+	}
+}
+
+/* @keyframes TopWave {
+	0% {
+		transform: rotateZ(360deg);
+	}
+	100% {
+		transform: rotateZ(0deg);
+	}
+}
+
+@keyframes MiddleWave {
+	0% {
+		transform: rotateZ(360deg);
+	}
+	100% {
+		transform: rotateZ(0deg);
+	}
+}
+
+@keyframes BottomWave {
+	0% {
+		transform: rotateZ(0deg);
+	}
+	100% {
+		transform: rotateZ(360deg);
+	}
+} */

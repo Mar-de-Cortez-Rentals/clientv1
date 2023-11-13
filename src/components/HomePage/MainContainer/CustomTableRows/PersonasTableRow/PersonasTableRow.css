@@ -1,0 +1,113 @@
+.ShowedInfo.Personas {
+	display: block;
+}
+
+.HeaderPersonaCard {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.HeaderPersonaCard .PersonaInfo {
+	grid-row: 1;
+}
+
+.HeaderPersonaCard .PersonaInfo div:first-child {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.HeaderPersonaCard .PersonaInfo h3 {
+	font-size: 1.3em;
+}
+
+.HeaderPersonaCard .PersonaMoreInfo {
+	grid-row: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+}
+
+.HeaderPersonaCard .PersonaMoreInfo p,
+.HeaderPersonaCard .PersonaMoreInfo h5 {
+	display: flex;
+	justify-content: end;
+}
+
+.PersonaMoreInfo p span {
+	margin-left: 5px;
+	min-width: 10px;
+	z-index: 10;
+}
+
+.HeaderPersonaCard select {
+	font-size: 1em !important;
+}
+
+.Personas.Expandible div p:last-of-type {
+	width: fit-content;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 10px;
+	width: 100%;
+	word-break: break-all;
+}
+
+.ConfirmDiv {
+	display: flex;
+	justify-content: center;
+}
+
+.ConfirmLending {
+	opacity: 0;
+	height: 0;
+	transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
+}
+.Persona:hover .ConfirmLending {
+	height: 25px;
+	opacity: 1;
+}
+.DisabledConfirmLending {
+	pointer-events: none;
+	opacity: 0;
+	height: 0;
+	transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.ConfirmLending:hover {
+	background: var(--gradient-accent);
+}
+
+@media screen and (min-width: 768px) {
+	.HeaderPersonaCard {
+		display: grid;
+		grid-template-columns: auto auto;
+	}
+	.HeaderPersonaCard .PersonaInfo {
+		grid-column: 1;
+		grid-row: inherit;
+	}
+	.HeaderPersonaCard .PersonaMoreInfo {
+		grid-column: 2;
+		grid-row: inherit;
+	}
+
+	.HeaderPersonaCard .PersonaInfo h3 {
+		font-size: 1.3em;
+		line-height: unset;
+	}
+}
+
+.InteractiveButtons.Lendings p {
+	grid-column: 1;
+}
+.InteractiveButtons.Lendings div {
+	grid-column: 2;
+}
+
+.InteractiveButtons.Lendings a {
+	position: relative;
+	z-index: 10;
+	justify-items: flex-start;
+}

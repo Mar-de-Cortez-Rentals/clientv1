@@ -1,0 +1,184 @@
+.TableRow {
+	max-width: unset;
+	border-radius: 15px;
+	padding: 10px 20px 10px 20px;
+	background: var(--tertiary-bg);
+	grid-template-rows: 1fr auto;
+	overflow: hidden;
+}
+
+.SelectItem {
+	border-radius: 50%;
+	opacity: 0.5;
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.SelectItem:checked {
+	opacity: 1;
+}
+
+.TableRow p,
+.TableRow h3 {
+	word-break: break-all;
+}
+
+.itemAvailable {
+	position: relative;
+	text-align: end;
+	cursor: pointer;
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.itemAvailable:hover {
+	color: var(--active-fg) !important;
+}
+
+.itemAvailable::before {
+	scale: 0;
+	content: attr(data-tooltip);
+	position: absolute;
+	color: var(--inactive-fg);
+	background: var(--secundary-bg);
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 10px;
+	left: -10px;
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1) 1s;
+	font-size: 0.8em;
+}
+
+.itemAvailable:hover::before {
+	scale: 1;
+	transform: translateX(-100%);
+}
+
+.TableRow:hover,
+.TableRow:active {
+	color: var(--active-fg);
+}
+
+.TableRow .ShowedInfo {
+	display: grid;
+	grid-template-columns: 1fr 1fr auto;
+	gap: 20px;
+}
+
+.TableRow .ShowedInfo .BrandModel div {
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+}
+.BrandModel h4,
+.BrandModel p {
+	display: flex;
+	margin-left: 4px;
+	text-align: center;
+}
+
+.TableRow .Expandible {
+	transition: max-height 0.3s ease;
+	max-height: 0;
+	opacity: 0 !important;
+}
+
+.TableRow .Expandible.Show {
+	border-top: 1px dashed var(--inactive-fg);
+	max-height: 300px;
+	opacity: 1 !important;
+}
+
+.returnedNotes {
+	font-weight: 600;
+}
+
+.returnedNotes span {
+	font-weight: 400;
+	color: var(--inactive-fg);
+}
+
+.InteractiveButtons {
+	margin-top: 10px;
+	display: flex;
+	justify-items: end;
+	justify-content: space-between;
+}
+
+.EditButtons.Lendings {
+	margin-left: unset;
+}
+
+.TableRow.Expand .Expandible {
+	animation: ShowExpandible 1.5s forwards;
+}
+
+@keyframes ShowExpandible {
+	0% {
+		opacity: 0;
+		position: relative;
+	}
+
+	100% {
+		opacity: 1;
+		position: relative;
+	}
+}
+
+/* ExpandBar Area */
+.ExpandBar {
+	box-sizing: border-box;
+	opacity: 0;
+	display: flex;
+	position: absolute;
+	justify-content: center;
+	font-size: 1.5em;
+	transition: all 1s ease-in-out;
+	width: 100%;
+	transform-origin: center;
+	translate: 0 -16px;
+	left: 0;
+	background: linear-gradient(to top, var(--primary-bg), transparent 100%);
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 16px;
+	color: var(--inactive-fg);
+}
+
+.TableRow:hover .ExpandBar.Show {
+	opacity: 1;
+	display: flex;
+	cursor: pointer;
+}
+/* END ExpandBar Area */
+
+@media screen and (max-width: 1000px) {
+	.TableRow .ShowedInfo {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 20px;
+	}
+}
+@media screen and (max-width: 768px) {
+	.TableRow {
+		font-size: 1em;
+	}
+
+	.TableRow h4,
+	.TableRow h3,
+	.TableRow h2 {
+		font-size: 1.5em;
+	}
+
+	.TableRow .ShowedInfo {
+		display: inline;
+	}
+
+	.TableRow .ShowedInfo div {
+		width: fit-content;
+	}
+
+	.itemAvailable::before {
+		display: none;
+	}
+
+	.ExpandBar {
+		translate: 0 -10px;
+	}
+}

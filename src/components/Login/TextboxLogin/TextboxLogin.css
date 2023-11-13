@@ -1,0 +1,50 @@
+.cardInputsContainer {
+	display: flex;
+	align-items: center; /* Centra los elementos verticalmente */
+	position: relative; /* Permite posicionar el icono */
+}
+.cardInputsContainer > input[type="text"],
+input[type="email"],
+input[type="password"] {
+	padding-left: 1em;
+	padding-right: 1em;
+	font-size: calc(1rem + 0.5vw);
+}
+input[type="email"],
+input[type="password"] {
+	padding-right: 1em;
+	padding-left: 2em;
+}
+
+.cardInputs.invalidInput {
+	border: 1.5px solid red;
+}
+
+.cardInputs {
+	box-sizing: border-box;
+	background-color: #d9d9d9;
+	color: #353840;
+	border: none;
+	border-radius: 25px;
+	padding: 10px 0px 10px;
+	transition: all 0.3s;
+	box-shadow: 2px 5px;
+	font-size: calc(1rem + 0.5vw);
+	height: fit-content;
+	width: 100%;
+	box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+.cardInputs:focus {
+	outline: none;
+	box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.25);
+	opacity: 0.8;
+}
+
+.faIconsLogin {
+	position: absolute;
+	z-index: 1;
+	left: 12px;
+	font-size: calc(1rem + 0.5vw);
+	color: #545966;
+}

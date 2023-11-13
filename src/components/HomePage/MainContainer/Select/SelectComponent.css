@@ -1,0 +1,9 @@
+.SelectCombo {
+	font-size: 0.8em !important;
+	color: var(--active-fg);
+}
+
+.SelectCombo.Disabled {
+	opacity: 0.7;
+	color: var(--inactive-fg);
+}

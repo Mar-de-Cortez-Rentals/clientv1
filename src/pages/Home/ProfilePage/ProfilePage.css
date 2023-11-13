@@ -1,0 +1,96 @@
+.HomeChildContainer.ProfilePage {
+	display: flex;
+	padding: 10px 20px 10px 20px;
+	gap: 10px;
+}
+
+.ProfileSection {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	gap: 25px;
+	padding-left: 20px;
+	padding-right: 20px;
+	align-items: center;
+}
+
+.ProfileSection h5 {
+	display: flex;
+	gap: 10px;
+}
+.EditPass {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+
+	gap: 10px;
+}
+.EditPass input[type='password'] {
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 1em;
+}
+
+.ProfileSection a {
+	text-decoration: none;
+	color: var(--inactive-fg);
+}
+
+.ProfilePicture {
+	width: 150px;
+	height: 150px;
+	border-radius: 25px;
+	object-fit: cover;
+	border: 3px solid var(--inactive-fg);
+}
+
+.OnCreateButton.LogOut:hover {
+	background-color: var(--error-fg);
+	color: white;
+}
+
+.ProfileInfo {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 10px 0 10px 0;
+}
+
+.ProfileEditIcon {
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+	cursor: pointer;
+}
+
+.ProfileEditIcon:hover {
+	color: var(--active-fg);
+	scale: 1.1;
+}
+
+.EmpNumb {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+/* ///////////////////////////////////// */
+
+/* TEXTBOX STYLES */
+
+.ProfileInfo .Textbox {
+	background: var(--tertiary-bg);
+	max-width: 40%;
+}
+
+.EditFullName .Textbox {
+	font-size: 1.1em;
+}
+
+.EditFullName {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+/* ///////////////////////////////////// */

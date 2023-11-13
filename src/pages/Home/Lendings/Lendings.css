@@ -1,0 +1,72 @@
+.tableHeader.Lendings .TabOptions {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.tableHeader.Lendings h2 {
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+	color: var(--inactive-fg);
+}
+.tableHeader.Lendings h2:hover,
+.tableHeader.Lendings h2.active {
+	color: var(--active-fg);
+}
+
+.SearchOptions div:nth-child(2) {
+	gap: 5px;
+}
+
+.tableHeader.Lendings .tableSearchBar {
+	margin: 0;
+	padding: 0 10px 0 10px;
+	width: 100%;
+}
+
+.TabOptions {
+	gap: 20px;
+}
+
+.LendingsRows {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+/* 
+.ActiveLendingsRows {
+	scale: 0.8;
+	opacity: 0;
+	position: absolute;
+	bottom: 0;
+	transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.ReturnedLendingsRows {
+	scale: 0.8;
+	opacity: 0;
+	transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.ActiveLendingsRows.Active,
+.ReturnedLendingsRows.Active {
+	position: unset;
+	bottom: unset;
+	scale: 1;
+	opacity: 1;
+} */
+
+@media screen and (min-width: 768px) {
+	.tableHeader.Lendings .SearchOptions {
+		display: grid;
+		grid-template-columns: auto auto;
+		justify-content: space-between;
+	}
+
+	.tableHeader.Lendings .SearchOptions div {
+		flex-wrap: wrap;
+	}
+
+	.tableHeader.Lendings .SearchOptions .tableSearchBar {
+		width: auto;
+	}
+}

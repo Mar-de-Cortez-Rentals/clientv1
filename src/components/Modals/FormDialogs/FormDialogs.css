@@ -1,0 +1,47 @@
+.SwalHtmlContainer input,
+.SwalHtmlContainer select,
+.SwalHtmlContainer p {
+	color: var(--active-fg) !important;
+	border-radius: 10px;
+	background: var(--tertiary-bg);
+	outline: none !important;
+	border: 1px solid var(--inactive-fg);
+	padding: 0 5px 0 5px;
+}
+
+.SwalHtmlContainer .InputError {
+	border: 2px solid var(--error-fg) !important;
+}
+
+.SwalIcon {
+	font-size: 0.5em;
+}
+
+.SwalTitle {
+	line-height: 0%;
+}
+
+.SwalConfirmButton {
+	background: var(--primary-bg) !important;
+	color: var(--inactive-fg);
+}
+
+.SwalConfirmButton:hover {
+	background: var(--gradient-accent) !important;
+	color: var(--active-fg);
+}
+
+.SwalCancelButton {
+	background: var(--primary-bg) !important;
+	color: var(--inactive-fg);
+}
+
+.SwalCancelButton:hover {
+	background: var(--secundary-bg) !important;
+	color: var(--active-fg);
+}
+
+.SwalCancelButton:hover,
+.SwalConfirmButton:hover {
+	opacity: 0.8;
+}

@@ -1,0 +1,187 @@
+.MenuandUser {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	border-radius: 0 50px 0 0;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+	background: var(--secundary-bg);
+}
+
+.MenuContainer {
+	display: flex;
+	flex-direction: column;
+	padding: 0 4px 0 0;
+}
+
+.menuVertical {
+	position: relative;
+	margin-top: 30px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 65vh;
+	padding-left: 0;
+}
+
+.hideMenuButton {
+	position: absolute;
+	right: -18px;
+	top: 5%;
+	background: var(--primary-bg);
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+	z-index: 1;
+}
+.hideMenuButton:active {
+	background: transparent;
+}
+
+.hideMenuButton.Rotate {
+	transform: rotate(180deg);
+}
+
+.MenuButton.hide {
+	justify-content: center;
+}
+
+.hideMenuButton .ico {
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 0.8em;
+	height: 0.8em;
+	margin: 0.2em;
+	font-size: 2em;
+	color: var(--primary-bg);
+	background: var(--gradient-accent);
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.hideMenuButton:hover {
+	background: var(--gradient-accent);
+}
+
+.menuHeader {
+	position: relative;
+	padding-left: 35px;
+	color: var(--active-fg);
+	opacity: 50%;
+	margin: 20px 0 10px 0;
+	font-size: 0.8em;
+}
+.menuHeader:nth-child(1) {
+	margin-top: 0;
+}
+
+li span::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 1.2rem;
+	height: 1px;
+	transition: all 0.3s ease-in-out;
+	background: var(--active-fg);
+	opacity: 50%;
+}
+
+.divGap {
+	width: 80%;
+	height: 100%;
+	align-self: center;
+	border-bottom: 2px solid var(--inactive-fg);
+	opacity: 0.5;
+}
+
+.menuUserSection {
+	display: grid;
+	grid-template-columns: 1fr 1.25fr;
+	grid-template-areas: "img User";
+	padding: 20px 10px 15px 10px;
+	align-items: center;
+	color: var(--inactive-fg);
+}
+
+.menuUserSection.Short {
+	grid-template-columns: 1fr;
+}
+
+.menuUserSection .ImgA {
+	justify-self: center;
+}
+
+.menuUserSection a,
+.menuUserSection a:hover,
+.menuUserSection a:focus {
+	color: inherit;
+}
+
+.menuUserSection p {
+	height: fit-content;
+	width: fit-content;
+	grid-area: UserName;
+	word-break: normal;
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menuUserSection p:hover {
+	color: var(--active-fg);
+	cursor: pointer;
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menuUserSection span {
+	height: fit-content;
+	width: fit-content;
+	grid-area: UserJob;
+	font-size: 0.8em;
+}
+
+.menuUserSection img {
+	justify-self: center;
+	grid-area: img;
+	width: 4em;
+	height: 4em;
+	object-fit: cover;
+	border-radius: 25px;
+	border: solid 2px;
+}
+
+li {
+	list-style: none;
+}
+
+@media screen and (max-width: 768px) {
+	.menuUserSection {
+		font-size: 0.8em;
+	}
+
+	img {
+		justify-self: center;
+		grid-area: img;
+		width: 4em;
+		height: 4em;
+		object-fit: cover;
+		border-radius: 25px;
+		border: solid 2px;
+	}
+
+	.hideMenuButton {
+		position: absolute;
+		right: -12px;
+		top: 5%;
+	}
+
+	.hideMenuButton .ico {
+		font-size: 1.5em;
+	}
+}
+
+@media screen and (max-height: 820px) {
+	.menuUserSection {
+		padding: 10px 0 10px 0;
+	}
+}

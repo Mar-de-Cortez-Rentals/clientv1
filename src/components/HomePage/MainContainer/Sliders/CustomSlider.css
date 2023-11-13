@@ -1,0 +1,9 @@
+.CustomSlider {
+	justify-content: center;
+}
+
+.imgDiv {
+	border-radius: 20px;
+	overflow: hidden;
+	margin: 20px 40px 20px 40px;
+}

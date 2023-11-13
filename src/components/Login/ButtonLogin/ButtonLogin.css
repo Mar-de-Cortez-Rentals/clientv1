@@ -1,0 +1,7 @@
+.btnLogin {
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-size: 1.4em;
+	height: fit-content;
+}

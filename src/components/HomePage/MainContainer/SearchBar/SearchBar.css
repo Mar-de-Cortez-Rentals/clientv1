@@ -1,0 +1,25 @@
+.RoundedRect {
+	box-sizing: border-box;
+	border-radius: 15px;
+	height: auto;
+	background: var(--tertiary-bg);
+	color: var(--active-fg);
+	outline: none;
+	border: none;
+	padding: 0 10px 0 10px;
+	margin: 0 5px 0 5px;
+	font-size: 0.9em;
+}
+
+.SearchBar.InvalidInput {
+	border: 1px solid var(--error-fg);
+}
+
+.SearchBar:focus {
+	outline: none;
+	caret-color: var(--primary-bg); /* Cambiar el color de la línea del cursor */
+}
+
+.SearchBar.Hidden {
+	display: none;
+}

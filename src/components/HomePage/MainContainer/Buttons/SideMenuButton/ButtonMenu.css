@@ -1,0 +1,36 @@
+.MenuButton {
+	display: flex;
+	margin: 5px 20px 15px 20px;
+	height: 60px;
+	align-items: center;
+	border-radius: 30px;
+	color: var(--inactive-fg);
+	font-size: 1.2em;
+}
+
+.MenuButton.short {
+	justify-content: center;
+}
+
+.MenuButton:hover {
+	background: var(--gradient-accent);
+	color: var(--active-fg);
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menuButtonIcon {
+	order: -1;
+	margin: 0 15px 0 15px;
+}
+
+a,
+a:hover {
+	text-decoration: none !important;
+}
+
+@media screen and (max-width: 600px) {
+	.MenuButton {
+		font-size: 1em;
+		height: 40px;
+	}
+}

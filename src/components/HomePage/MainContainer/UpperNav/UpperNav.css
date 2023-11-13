@@ -1,0 +1,39 @@
+.UpperNav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 15px 0 15px;
+	border-radius: 20px;
+	color: var(--inactive-fg);
+	background: var(--secundary-bg);
+}
+.UpperNav h2 {
+	font-size: 1.1em;
+}
+
+.NavRightSide {
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 20px;
+}
+
+.toggle-button {
+	display: flex;
+	background: transparent;
+	border: transparent;
+	font-size: 1.5em;
+	color: var(--inactive-fg);
+	align-items: center;
+	padding: 10px 0 10px 0;
+	transition: color 2s cubic-bezier(0.23, 1, 0.32, 1);
+	cursor: pointer;
+}
+
+.toggle-button:hover,
+.ShowMenu:hover {
+	color: var(--active-fg);
+}
+
+.toggle-button.themeicon {
+	font-size: 1.1em;
+}

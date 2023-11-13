@@ -1,0 +1,31 @@
+.SVG {
+	width: auto;
+	height: calc(150px + 10vw);
+	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+
+	&.expand {
+		height: calc(100px + 20vw);
+	}
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+	.SVG {
+		height: calc(100px + 5vw);
+		width: auto;
+
+		&.expand {
+			height: calc(100px + 5vw);
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.SVG {
+		height: calc(100px + 5vw);
+		width: auto;
+
+		&.expand {
+			height: calc(100px + 5vw);
+		}
+	}
+}

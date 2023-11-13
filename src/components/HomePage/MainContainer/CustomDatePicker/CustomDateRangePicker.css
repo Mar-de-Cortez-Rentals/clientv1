@@ -1,0 +1,30 @@
+.rs-picker-default .rs-picker-toggle {
+	border: none !important;
+	border-radius: 25px;
+	max-height: 30px;
+}
+
+.rs-picker-has-value .rs-btn .rs-picker-toggle-value,
+.rs-picker-has-value .rs-picker-toggle .rs-picker-toggle-value {
+	color: var(--active-fg) !important;
+}
+
+.rs-picker-menu {
+	border-radius: 20px !important;
+}
+
+#root
+	> div
+	> div.HomeMainContainer
+	> div
+	> div.tableHeader.Lendings
+	> div.SearchOptions
+	> div:nth-child(2)
+	> div
+	> div {
+	background: var(--tertiary-bg) !important;
+}
+
+.rs-picker-toggle-textbox {
+	margin-top: -2px !important;
+}

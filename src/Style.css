@@ -1,0 +1,71 @@
+:root,
+[data-theme="light"] {
+	--gradient-accent: #35a5b1;
+	--inactive-fg: #5b5f6a;
+	--active-fg: #292d32;
+	--primary-bg: #bec1c9;
+	--secundary-bg: #d0d1da;
+	--tertiary-bg: #eeeefb;
+	--logo-color: #e2e2e2;
+	--error-fg: #e24040;
+
+	font-size: 16px;
+	--transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+[data-theme="dark"] {
+	--gradient-accent: linear-gradient(226.32deg, #62d4e0 31%, #35a5b1 78.06%);
+	--inactive-fg: #cfcfcf;
+	--active-fg: #ffffff;
+	--primary-bg: #292d32;
+	--secundary-bg: #353840;
+	--tertiary-bg: #5b5f6a;
+	--logo-color: #ffffff;
+	font-size: 16px;
+}
+
+* {
+	font-family: "Baloo Thambi 2", roboto, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+body {
+	transition: var(--transition);
+	background: var(--secundary-bg) !important;
+	min-width: 300px;
+	direction: ltr;
+	text-shadow: none !important;
+	height: 100vh;
+	width: 100%;
+	overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+	:root {
+		font-size: 16px;
+	}
+}
+
+/* personalización de la barra de desplazamiento */
+::-webkit-scrollbar {
+	width: 5px; /* ancho de la barra */
+	height: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent; /* color del fondo */
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--primary-bg); /* color del thumb */
+	border-radius: 20px; /* borde redondeado */
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--primary-bg);
+	/* color del thumb en hover */
+}
+
+::-webkit-scrollbar-corner {
+	display: none;
+}

@@ -1,0 +1,34 @@
+.RollContainer {
+	display: flex;
+	overflow-x: auto;
+	width: 50%;
+	height: fit-content;
+}
+
+.RollItemsContainer {
+	display: flex;
+	flex-wrap: nowrap !important;
+	gap: 10px;
+}
+
+.TabOption.Card {
+	border: 1px solid var(--inactive-fg);
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	white-space: nowrap;
+	background: none;
+	font-size: 0.9em;
+	height: fit-content;
+}
+
+.TabOption.Card:hover {
+	background: var(--gradient-accent);
+}
+
+@media screen and (max-width: 500px) {
+	.Personas.SearchOptions .RollItemsContainer {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}

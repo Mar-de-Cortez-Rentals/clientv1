@@ -1,0 +1,49 @@
+.Personas.tableHeader {
+}
+
+.Personas.SearchOptions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: space-between;
+}
+
+.DivTabOpt {
+}
+
+.Personas.SearchOptions .SearchOptionsRigtside {
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+.Personas.SearchOptions .buttonKeepExpand {
+	display: flex;
+	color: var(--inactive-fg);
+	background: transparent;
+	border: 1px solid var(--inactive-fg);
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.Personas.SearchOptions .buttonKeepExpand:hover {
+	color: var(--active-fg);
+	border: 1px solid var(--active-fg);
+	background: var(--gradient-accent);
+}
+
+.Personas.SearchOptions .buttonKeepExpand.Active {
+	background: var(--gradient-accent);
+}
+
+@media screen and (max-width: 1150px) {
+	.Personas.SearchOptions .RollContainer {
+		width: 100%;
+	}
+
+	.Personas.SearchOptions .RollItemsContainer {
+		display: flex;
+		gap: 5px;
+	}
+}
