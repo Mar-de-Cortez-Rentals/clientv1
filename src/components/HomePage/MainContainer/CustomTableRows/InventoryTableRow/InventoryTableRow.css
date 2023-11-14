@@ -57,9 +57,6 @@
 }
 
 .TableRow .ShowedInfo {
-	display: grid;
-	grid-template-columns: 1fr 1fr auto;
-	gap: 20px;
 }
 
 .TableRow .ShowedInfo .BrandModel div {

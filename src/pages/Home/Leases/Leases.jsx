@@ -1,27 +1,27 @@
-import './Lendings.css';
-import { useParams } from 'react-router-dom';
-import { useEffect, useContext, useState, useRef } from 'react';
-import { SectionContext } from '../../../context/SectionContext';
-import usePopulateTable from '../../../hooks/usePopulateTable.jsx';
-import useInfinitScrolling from '../../../hooks/useInfiniteScrolling.jsx';
-import useCountResults from '../../../hooks/useCountResults';
+import { useContext, useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import { SectionContext } from "../../../context/SectionContext.jsx";
+import useCountResults from "../../../hooks/useCountResults.jsx";
+import useInfinitScrolling from "../../../hooks/useInfiniteScrolling.jsx";
+import usePopulateTable from "../../../hooks/usePopulateTable.jsx";
+import "./Leases.scss";
 
-import { onlyNumbers } from '../../../helpers/regexes';
+import { onlyNumbers } from "../../../helpers/regexes.js";
 
-import { ModalAlert } from '../../../components/Modals/Alerts/Alerts';
-import Error from '../../../components/HomePage/MainContainer/Error/Error';
-import Loading from '../../../components/HomePage/MainContainer/Loading/Loading';
-import LendingsTableRow from '../../../components/HomePage/MainContainer/CustomTableRows/LendingsTableRow/LendingsTableRow';
-import SelectComponent from '../../../components/HomePage/MainContainer/Select/SelectComponent';
-import CustomDateRangePicker from '../../../components/HomePage/MainContainer/CustomDatePicker/CustomDateRangePicker.jsx';
-import SearchBar from '../../../components/HomePage/MainContainer/SearchBar/SearchBar';
+import CustomDateRangePicker from "../../../components/HomePage/MainContainer/CustomDatePicker/CustomDateRangePicker.jsx";
+import LendingsTableRow from "../../../components/HomePage/MainContainer/CustomTableRows/LendingsTableRow/LendingsTableRow.jsx";
+import Error from "../../../components/HomePage/MainContainer/Error/Error.jsx";
+import Loading from "../../../components/HomePage/MainContainer/Loading/Loading.jsx";
+import SearchBar from "../../../components/HomePage/MainContainer/SearchBar/SearchBar.jsx";
+import SelectComponent from "../../../components/HomePage/MainContainer/Select/SelectComponent.jsx";
+import { ModalAlert } from "../../../components/Modals/Alerts/Alerts.jsx";
 
-function Lendings() {
+function Leases() {
 	//Maneja el título de la barra de navegación superior
 	//Handles the title for the upper navbar
 	const { handleTitle } = useContext(SectionContext);
 	useEffect(() => {
-		handleTitle('Prestamos');
+		handleTitle("Prestamos");
 		setPageNumber(1);
 	}, []);
 
@@ -31,10 +31,8 @@ function Lendings() {
 	//Varibles used by the personalized hook that is in charge of pupulating the tableview
 	const [validInput, setvalidInput] = useState(true);
 	const [pageNumber, setPageNumber] = useState(1);
-	const [isActive, setIsActive] = useState('false');
-	const [queryOption, setQueryOption] = useState(
-		id ? 'borrower_name' : 'lending_id'
-	);
+	const [isActive, setIsActive] = useState("false");
+	const [queryOption, setQueryOption] = useState(id ? "borrower_name" : "lending_id");
 	const [query, setQuery] = useState(id);
 	const [datesToFilter, setDatesToFilter] = useState([]);
 
@@ -44,25 +42,11 @@ function Lendings() {
 		loading: countLoading,
 		error: countError,
 		countData: countData,
-	} = useCountResults(
-		'/api/lendings/getCount',
-		isActive,
-		queryOption,
-		query,
-		datesToFilter
-	);
+	} = useCountResults("/api/lendings/getCount", isActive, queryOption, query, datesToFilter);
 
 	//Se encarga de las solicitudes http al servidor para completar la tabla
 	//Takes care of the http requests to the server to pupulate the table
-	const { loading, error, tableData, hasMore } = usePopulateTable(
-		'get',
-		'/api/lendings/get',
-		pageNumber,
-		isActive,
-		queryOption,
-		query,
-		datesToFilter
-	);
+	const { loading, error, tableData, hasMore } = usePopulateTable("get", "/lease", pageNumber, isActive, queryOption, query, datesToFilter);
 
 	//se ocupa del último elemento representado en la lista, por lo que una vez que choca con la parte visible del navegador, envía una señal para enviar otra solicitud al servidor
 	//Takes care of the las element rendered on the list so once it collides with the viewable part of the browser sends a signal to send another request to the server
@@ -74,11 +58,7 @@ function Lendings() {
 		const value = e.target.value;
 		// Las siguientes declaraciones if manejan si el usuario escribe letras en lugar de números cuando intenta buscar por ID
 		//The following if statements handles if the user types letters instead of numbers when tries to search by ID
-		if (
-			queryOption == 'lending_id' &&
-			!onlyNumbers.test(value) &&
-			value != ''
-		) {
+		if (queryOption == "lending_id" && !onlyNumbers.test(value) && value != "") {
 			e.target.textContent = value.match(/\d+/g);
 			setvalidInput(false);
 		} else {
@@ -91,8 +71,8 @@ function Lendings() {
 	//Maneja la opción de búsqueda (por ejemplo: buscar por ID, por nombre del prestatario, etc.)
 	//Handles the search option (for example: search by ID, by BorrowerName, etc)
 	const handleQueryOption = (field, value, e) => {
-		if (value == 'lending_id' && !onlyNumbers.test(query) && query != '') {
-			ModalAlert('error', 'La entrada no es válida', true);
+		if (value == "lending_id" && !onlyNumbers.test(query) && query != "") {
+			ModalAlert("error", "La entrada no es válida", true);
 			setQueryOption((prev) => {
 				e.target.value = prev;
 				return prev;
@@ -123,7 +103,7 @@ function Lendings() {
 	//Handles the ID validation function
 	const handleValidId = (e) => {
 		const value = e.target.value;
-		if (value == 'lending_id' && !onlyNumbers.test(value)) {
+		if (value == "lending_id" && !onlyNumbers.test(value)) {
 			e.target.value = value.match(/\d+/g);
 		}
 	};
@@ -133,10 +113,10 @@ function Lendings() {
 	//Arreglo de opciones que alimenta al componente de selección #SelectComponent
 	//Array of options that feed the #SelectComponent
 	const queryOptions = [
-		{ value: 'lending_id', label: 'ID' },
-		{ value: 'borrower_name', label: 'Prestatario' },
-		{ value: 'user_name', label: 'Prestador' },
-		{ value: 'lending_remarks', label: 'Notas' },
+		{ value: "lending_id", label: "ID" },
+		{ value: "borrower_name", label: "Prestatario" },
+		{ value: "user_name", label: "Prestador" },
+		{ value: "lending_remarks", label: "Notas" },
 	];
 
 	return (
@@ -144,41 +124,27 @@ function Lendings() {
 			<div className='ChildMaster'>
 				<div className='tableHeader Lendings'>
 					<div className='TabOptions'>
-						<h2
-							className={isActive == 'false' ? 'active' : ''}
-							onClick={() => handleTabActive('false')}
-						>
+						<h2 className={isActive == "false" ? "active" : ""} onClick={() => handleTabActive("false")}>
 							Activos
 						</h2>
-						<h2
-							className={isActive == 'true' ? 'active' : ''}
-							onClick={() => handleTabActive('true')}
-						>
+						<h2 className={isActive == "true" ? "active" : ""} onClick={() => handleTabActive("true")}>
 							Inactivos
 						</h2>
 					</div>
 					<div className='SearchOptions'>
 						<div>
-							<p>
-								{!countError && !countLoading && countData && validInput
-									? `${countData} resultado(s)`
-									: `					`}
-							</p>
+							<p>{!countError && !countLoading && countData && validInput ? `${countData} resultado(s)` : `					`}</p>
 						</div>
 
 						<div>
 							<CustomDateRangePicker handleRange={handleDateRanges} />
-							<SelectComponent
-								options={queryOptions}
-								handler={handleQueryOption}
-								defaultSelected={queryOption}
-							/>
+							<SelectComponent options={queryOptions} handler={handleQueryOption} defaultSelected={queryOption} />
 							<SearchBar
 								handler={handleSearch}
 								validInput={validInput}
 								idInput={handleValidId}
 								refn={inputSearchRef}
-								defaultValue={id || ''}
+								defaultValue={id || ""}
 								visible={true}
 							/>
 						</div>
@@ -186,11 +152,7 @@ function Lendings() {
 				</div>
 
 				<div className='TableScroll'>
-					<div
-						className={`tableContainer ShowTableAnim ${
-							tableData.length > 0 ? 'Active' : ''
-						}`}
-					>
+					<div className={`tableContainer ShowTableAnim ${tableData.length > 0 ? "Active" : ""}`}>
 						{tableData
 							/* .sort(
 								(a, b) =>
@@ -205,25 +167,19 @@ function Lendings() {
 										</div>
 									);
 								} else {
-									return (
-										<LendingsTableRow key={object.lending_id} data={object} />
-									);
+									return <LendingsTableRow key={object.lending_id} data={object} />;
 								}
 							})}
 
 						<div>{loading && <Loading />}</div>
 						<div>{error && <Error />}</div>
-						<div>
-							{!loading && !error && tableData.length < 1 && (
-								<Error noResults={tableData.length < 1} />
-							)}
-						</div>
+						<div>{!loading && !error && tableData.length < 1 && <Error noResults={tableData.length < 1} />}</div>
 					</div>
 				</div>
-				<div style={{ height: '100px' }}></div>
+				<div style={{ height: "100px" }}></div>
 			</div>
 		</div>
 	);
 }
 
-export default Lendings;
+export default Leases;

@@ -16,22 +16,18 @@
 /* value = '${element[2] && element[2]}'; */
 
 export const ItemFields = [
-	['item_type', 'Nombre', ''],
-	['item_brand', 'Marca', ''],
-	['item_model', 'Modelo', ''],
-	['item_description', 'Descripción', ''],
-	['item_available', true, false],
-	['item_remarks', 'Notas', ''],
+	["name", "Nombre", ""],
+	["address", "Dirección", ""],
+	["type", "Tipo", "select"],
+	["baseCost", "Costo Base", "number"],
 ];
 
-const item_available_options =
-	`<option value="true">Disponible</option>` +
-	`<option value="false">No disponible</option>`;
+const item_available_options = `<option value="casa">Casa</option>` + `<option value="apartamento">Apartamento</option>`;
 
 export const ItemForm = ItemFields.map((element) => {
-	if (element[0] === 'item_available') {
+	if (element[2] === "select") {
 		return `<select id="${element[0]}" class="swal2-select" >${item_available_options}</select>`;
 	} else {
-		return `<input id="${element[0]}" class="swal2-input" placeholder="${element[1]}"/>`;
+		return `<input id="${element[0]}" type="${element[2]}" min="0" class="swal2-input" placeholder="${element[1]}"/>`;
 	}
-}).join('');
+}).join("");

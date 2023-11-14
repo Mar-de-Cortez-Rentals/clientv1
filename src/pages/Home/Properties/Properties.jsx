@@ -7,7 +7,6 @@ import usePopulateTable from "../../../hooks/usePopulateTable.jsx";
 import "./Properties.css";
 
 import { CreateReq } from "../../../apis/ApiReqests.js";
-import { handleRegisterToBitacora } from "../../../apis/RecordToBitacora.js";
 
 import OnCreateButton from "../../../components/HomePage/MainContainer/Buttons/OnCreateButton/OnCreateButton.jsx";
 import InventoryTableRow from "../../../components/HomePage/MainContainer/CustomTableRows/InventoryTableRow/InventoryTableRow.jsx";
@@ -15,8 +14,7 @@ import Error from "../../../components/HomePage/MainContainer/Error/Error.jsx";
 import Loading from "../../../components/HomePage/MainContainer/Loading/Loading.jsx";
 import SearchBar from "../../../components/HomePage/MainContainer/SearchBar/SearchBar.jsx";
 import SelectComponent from "../../../components/HomePage/MainContainer/Select/SelectComponent.jsx";
-import { ModalAlert } from "../../../components/Modals/Alerts/Alerts.jsx";
-import { ItemFields, ItemForm } from "../../../components/Modals/FormDialogs/HtmlForms/ItemHtml.js";
+import { ItemFields, ItemForm } from "../../../components/Modals/FormDialogs/HtmlForms/PropertyHtml.js";
 import { ItemFormDialog } from "../../../components/Modals/FormDialogs/ItemFormDialog.jsx";
 
 function Properties() {
@@ -72,29 +70,10 @@ function Properties() {
 	//Maneja la creación de un nuevo material
 	//Handles the creation of a new item
 	const handleCreate = async () => {
-		try {
-			const element = await ItemFormDialog("Nuevo Material", ItemForm, ItemFields);
-			const resData = await CreateReq("/api/inventory/createItem", element, user.token);
-			if (resData?.code == "ERR_NETWORK" || resData?.code == "ERR_BAD_REQUEST") {
-				ModalAlert("error", "¡No se pudo conectar!", true);
-				return;
-			}
-			if (resData && resData.code !== "ERR_BAD_RESPONSE") {
-				ModalAlert("success", "¡Guardado!", true);
-				await handleRegisterToBitacora(
-					"/api/bitacora/create",
-					{
-						history_type: "Creación",
-						history_description: "Nuevo elemento: " + resData.item_type,
-						user_id: user.user_id,
-					},
-					user.token
-				);
-			} else {
-				ModalAlert("error", "¡No se pudo guardar!", true);
-			}
-		} catch (err) {
-			alert("Error");
+		const element = await ItemFormDialog("Nueva Propiedad", ItemForm, ItemFields);
+		const resData = await CreateReq("/property", element, user.token);
+		if (resData) {
+			setPageNumber(1);
 		}
 	};
 
@@ -116,12 +95,11 @@ function Properties() {
 	//Arreglos de opciones que alimenta al componente de selección #SelectComponent
 	//Arrays of options that feed the #SelectComponent
 	const queryOptions = [
-		{ value: "item_type", label: "Nombre" },
-		{ value: "item_brand", label: "Marca" },
-		{ value: "item_model", label: "Modelo" },
-		{ value: "item_description", label: "Descripción" },
-		{ value: "item_remarks", label: "Notas" },
+		{ value: "name", label: "Nombre" },
+		{ value: "address", label: "Dirección" },
+		{ value: "type", label: "Tipo" },
 	];
+
 	const availabityOptions = [
 		{ value: "", label: "Todos" },
 		{ value: "true", label: "Disponibles" },
@@ -152,25 +130,25 @@ function Properties() {
 					</div>
 
 					<div className='TableScroll'>
-						<div className={`tableContainer ShowTableAnim ${tableData.length > 0 ? "Active" : ""}`}>
+						<div className={`tableContainer ShowTableAnim ${tableData?.length > 0 ? "Active" : ""}`}>
 							{!showSelected &&
 								tableData.map((object) => {
-									if (tableData.length === tableData.lastIndexOf(object) + 1) {
+									if (tableData?.length === tableData.lastIndexOf(object) + 1) {
 										return (
-											<div key={object.item_id} ref={lastElementRef}>
+											<div key={object._id} ref={lastElementRef}>
 												<InventoryTableRow data={object} handleSelected={handleSelectedItem} selectedItems={selectedItems} />
 											</div>
 										);
 									} else {
-										return <InventoryTableRow key={object.item_id} data={object} handleSelected={handleSelectedItem} selectedItems={selectedItems} />;
+										return <InventoryTableRow key={object._id} data={object} handleSelected={handleSelectedItem} selectedItems={selectedItems} />;
 									}
 								})}
 
 							{showSelected &&
 								tableData
-									.filter((object) => selectedItems.includes(object.item_id))
+									.filter((object) => selectedItems.includes(object._id))
 									.map((object) => (
-										<InventoryTableRow key={object.item_id} data={object} handleSelected={handleSelectedItem} selectedItems={selectedItems} />
+										<InventoryTableRow key={object._id} data={object} handleSelected={handleSelectedItem} selectedItems={selectedItems} />
 									))}
 
 							<div>{loading && <Loading />}</div>
@@ -185,7 +163,7 @@ function Properties() {
 						<Link to={`../personas/${selectedItems}`}>Prestar Materiales</Link>
 					</button>
 				)}
-				{!error && user.user_type == "normal" && <OnCreateButton handler={handleCreate} />}
+				{!error && user.userType == "admin" && <OnCreateButton handler={handleCreate} />}
 			</div>
 		)
 	);

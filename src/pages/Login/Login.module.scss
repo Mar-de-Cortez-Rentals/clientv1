@@ -62,8 +62,10 @@
 	.Login {
 		width: calc(100% - 10px);
 
+		animation: showLogin 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+
 		&.ShowRegister {
-			transform: translateY(70vh) !important;
+			animation: hideLogin 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 		}
 	}
 }
@@ -138,5 +140,29 @@
 		transform: translateX(0%);
 
 		scale: 1;
+	}
+}
+
+@keyframes hideLogin {
+	0% {
+		transform: translateY(0%);
+	}
+	99% {
+		scale: 1;
+	}
+	100% {
+		transform: translateY(70vh);
+		opacity: 0;
+		scale: 0;
+	}
+}
+
+@keyframes showLogin {
+	0% {
+		transform: translateY(70vh);
+		scale: 1;
+	}
+	100% {
+		transform: translateY(0%);
 	}
 }

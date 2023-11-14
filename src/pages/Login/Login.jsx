@@ -42,7 +42,7 @@ function Login() {
 
 	return (
 		<>
-			<div className={Styles.PrimaryContainer} data-theme={theme}>
+			<div className={Styles.PrimaryContainer}>
 				<div className={``}>
 					<WavesSVG ShowRegister={showRegister} />
 				</div>

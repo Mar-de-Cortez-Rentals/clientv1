@@ -16,6 +16,7 @@
 }
 
 .HomeMainContainer {
+	gap: 10px;
 	transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
 	overflow: hidden;
 	display: grid;
@@ -71,12 +72,12 @@
 	}
 } */
 
-@media only screen and (min-width: 768px) and (min-height: 350px) {
+@media only screen and (min-width: 1024px) and (min-height: 350px) {
 	.HomePrimaryContainer {
 		font-size: 18px;
 		display: grid;
 		grid-template-columns: auto 1fr;
-		grid-template-areas: 'left main ';
+		grid-template-areas: "left main ";
 	}
 	.SideMenuContainer {
 		position: relative;
@@ -108,7 +109,7 @@
 		font-size: 18px;
 		background: var(--primary-bg);
 		grid-template-columns: auto 1fr auto;
-		grid-template-areas: 'left main right';
+		grid-template-areas: "left main right";
 	}
 
 	.SideMenuContainer {

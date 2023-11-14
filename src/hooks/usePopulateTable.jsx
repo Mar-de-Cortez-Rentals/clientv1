@@ -32,7 +32,7 @@ function usePopulateTable(method, api, pageNumber, conditional, queryOption, que
 				"x-access-token": user?.token,
 			},
 			method: `${method}`,
-			url: `${API_URL}${api}/${pageNumber - 1}/${10}`,
+			url: `${API_URL}${api}/${(pageNumber - 1) * 10}/${10}`,
 			params: {
 				...query,
 			},
@@ -42,7 +42,11 @@ function usePopulateTable(method, api, pageNumber, conditional, queryOption, que
 				setTableData((prevTableData) => {
 					return [...new Set([...prevTableData, ...res.data])];
 				});
-				setHasMore(res.data.length > 0);
+				setHasMore((prev) => {
+					console.log(res.data.length > 0);
+					console.log(prev);
+					return res.data.length > 0;
+				});
 				setLoading(false);
 			})
 			.catch((e) => {
