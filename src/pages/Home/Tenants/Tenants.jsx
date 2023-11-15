@@ -7,7 +7,6 @@ import usePopulateTable from "../../../hooks/usePopulateTable.jsx";
 import "./Tenants.scss";
 
 import { CreateReq } from "../../../apis/ApiReqests.js";
-import { handleRegisterToBitacora } from "../../../apis/RecordToBitacora.js";
 import { onlyNumbers } from "../../../helpers/regexes.js";
 
 import OnCreateButton from "../../../components/HomePage/MainContainer/Buttons/OnCreateButton/OnCreateButton.jsx";
@@ -16,10 +15,9 @@ import Error from "../../../components/HomePage/MainContainer/Error/Error.jsx";
 import Loading from "../../../components/HomePage/MainContainer/Loading/Loading.jsx";
 import SearchBar from "../../../components/HomePage/MainContainer/SearchBar/SearchBar.jsx";
 import SelectComponent from "../../../components/HomePage/MainContainer/Select/SelectComponent.jsx";
-import TabOptionsComponent from "../../../components/HomePage/MainContainer/TabOptionsComponent/TabOptionsComponent.jsx";
 import { ModalAlert } from "../../../components/Modals/Alerts/Alerts.jsx";
 import { ConfirmModal } from "../../../components/Modals/ConfirmModal/ConfirmModal.jsx";
-import { PersonaFields, PersonaForm } from "../../../components/Modals/FormDialogs/HtmlForms/PersonaHtml.js";
+import { ContactFields, PersonaFields, PersonaFullForm } from "../../../components/Modals/FormDialogs/HtmlForms/PersonaHtml.js";
 import { PersonaFormDialog } from "../../../components/Modals/FormDialogs/PersonaFormDialog.jsx";
 
 import { faUpRightAndDownLeftFromCenter } from "@fortawesome/free-solid-svg-icons";
@@ -48,22 +46,15 @@ function Tenants() {
 
 	//Se encarga de las solicitudes http al servidor para completar la tabla
 	//Takes care of the http requests to the server to pupulate the table
-	const { loading, error, tableData, hasMore } = usePopulateTable("get", "/tenant", pageNumber, userTypeQuery, queryOption, query);
+	const { loading, error, tableData, hasMore } = usePopulateTable("/tenant", pageNumber, query);
 
 	//se ocupa del último elemento representado en la lista, por lo que una vez que choca con la parte visible del navegador, envía una señal para enviar otra solicitud al servidor
 	//Takes care of the las element rendered on the list so once it collides with the viewable part of the browser sends a signal to send another request to the server
 	const lastElementRef = useInfinitScrolling(loading, hasMore, setPageNumber);
 
-	//Maneja la consulta a la base de datos basada en el tipo de usuario
-	//Handles the query to the database based on the borrower_type
-	const handleUserType = (e) => {
-		setUserTypeQuery(["borrower_type", e.target.value]);
-		setPageNumber(1);
-	};
-
 	//Maneja las funciones de busqueda
 	//Handles search when te user types into the input component
-	const handleSearch = (e) => {
+	const handleQuery = (e) => {
 		const value = e.target.value;
 		// Las siguientes declaraciones if manejan si el usuario escribe letras en lugar de números cuando intenta buscar por ID
 		//The following if statements handles if the user types letters instead of numbers when tries to search by ID
@@ -77,57 +68,14 @@ function Tenants() {
 		}
 	};
 
-	//Maneja la opción de búsqueda (por ejemplo: buscar por ID, por nombre del prestatario, etc.)
-	//Handles the search option (for example: search by ID, by BorrowerName, etc)
-	const handleQueryOption = (field, value, e) => {
-		if (queryOption == "borrower_career" && value != "borrower_career") {
-			setPageNumber(1);
-			setQuery("");
-			setQueryOption(value);
-		} else if (value == "borrower_id" && !onlyNumbers.test(query) && query != "") {
-			ModalAlert("error", "La entrada no es válida", true);
-			setQueryOption((prev) => {
-				e.target.value = prev;
-				return prev;
-			});
-		} else {
-			setvalidInput(true);
-			setPageNumber(1);
-			setQueryOption(value);
-			setQuery();
-		}
-	};
-
 	//Maneja la creación de un nuevo prestatatario
 	//Handles the creation of a new borrower
 	const handleCreate = async () => {
-		try {
-			const element = await PersonaFormDialog("Nuevo Prestatario", PersonaForm, PersonaFields);
-			const resData = await CreateReq("/api/personas/createPersona", element, user.token);
-			if (resData?.response?.status == 409) {
-				ModalAlert("error", "¡ID duplicado!", true);
-				return;
-			}
-			if (resData.code == "ERR_NETWORK" || resData?.code == "ERR_BAD_REQUEST") {
-				ModalAlert("error", "¡No se pudo conectar!", true);
-				return;
-			}
-			if (resData && resData.code !== "ERR_BAD_RESPONSE") {
-				ModalAlert("success", "¡Guardado!", true);
-				await handleRegisterToBitacora(
-					"/api/bitacora/create",
-					{
-						history_type: "Creación",
-						history_description: "Nuevo prestatario: " + resData.borrower_fullname + " con ID: " + resData.borrower_id + ", " + resData.borrower_type,
-						user_id: user.user_id,
-					},
-					user.token
-				);
-			} else {
-				ModalAlert("error", "¡No se pudo guardar!", true);
-			}
-		} catch (err) {
-			alert("Error");
+		const element = await PersonaFormDialog("Nuevo Arrendatario", PersonaFullForm, PersonaFields, ContactFields);
+		console.log(element);
+		const resData = await CreateReq("/tenant", element, user.token);
+		if (resData) {
+			setPageNumber(1);
 		}
 	};
 
@@ -169,10 +117,9 @@ function Tenants() {
 	const inputSearchRef = useRef(null);
 
 	const queryOptions = [
-		{ value: "borrower_id", label: "ID" },
-		{ value: "borrower_fullname", label: "Nombre" },
+		{ value: "last_name", label: "Nombre/Propiedad" },
+		{ value: "tenant_name", label: "Arrendatario" },
 		{ value: "borrower_career", label: "Carrera" },
-		{ value: "borrower_notes", label: "Notas" },
 	];
 
 	const careerOptions = [
@@ -190,9 +137,9 @@ function Tenants() {
 				<div className='Personas tableHeader'>
 					<h2>Arrendatarios</h2>
 					<div className='Personas SearchOptions'>
-						<TabOptionsComponent handler={handleUserType} api='/api/personas/getTabs' tabOption='borrower_type' />
+						{/* <TabOptionsComponent handler={handleUserType} api='/api/personas/getTabs' tabOption='borrower_type' /> */}
 						<div className='SearchOptionsRigtside'>
-							<SelectComponent options={queryOptions} handler={handleQueryOption} />
+							<SelectComponent options={queryOptions} handler={handleQuery} />
 							{queryOption == "borrower_career" && (
 								<SelectComponent
 									options={careerOptions}
@@ -202,7 +149,7 @@ function Tenants() {
 									}}
 								/>
 							)}
-							<SearchBar visible={queryOption != "borrower_career"} handler={handleSearch} validInput={validInput} refn={inputSearchRef} />
+							<SearchBar visible={queryOption != "borrower_career"} handler={handleQuery} validInput={validInput} refn={inputSearchRef} />
 							<button
 								className={`buttonKeepExpand ${keepExpand ? `Active` : ""}`}
 								onClick={() => {
@@ -220,13 +167,13 @@ function Tenants() {
 							tableData.map((object) => {
 								if (tableData.length === tableData.lastIndexOf(object) + 1) {
 									return (
-										<div key={object.borrower_id} ref={lastElementRef}>
+										<div key={object._id} ref={lastElementRef}>
 											<PersonasTableRow data={object} keepExpand={keepExpand} lend={items} handleConfirmLending={handleConfirmLending} />
 										</div>
 									);
 								} else {
 									return (
-										<div key={object.borrower_id}>
+										<div key={object._id}>
 											<PersonasTableRow data={object} keepExpand={keepExpand} lend={items} handleConfirmLending={handleConfirmLending} />
 										</div>
 									);
@@ -241,7 +188,7 @@ function Tenants() {
 
 				<div style={{ height: "100px" }}></div>
 			</div>
-			{!error && user.user_type == "normal" && <OnCreateButton handler={handleCreate} />}
+			{!error && user.userType == "admin" && <OnCreateButton handler={handleCreate} />}
 		</div>
 	);
 }

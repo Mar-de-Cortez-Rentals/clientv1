@@ -27,6 +27,7 @@
 }
 
 .Loading svg g#logo-lines {
+	transform-origin: center;
 	animation: LinesRotate 10s linear infinite;
 }
 
@@ -35,7 +36,7 @@
 	filter: invert(50%);
 }
 
-.Loading @keyframes LinesRotate {
+@keyframes LinesRotate {
 	0% {
 		transform: rotate(0deg);
 	}

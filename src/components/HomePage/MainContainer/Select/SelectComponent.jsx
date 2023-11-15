@@ -1,20 +1,12 @@
-import { useEffect } from 'react';
-import './SelectComponent.css';
+import "./SelectComponent.css";
 
-function SelectComponent({
-	options,
-	handler,
-	field,
-	disable,
-	defaultSelected,
-}) {
+function SelectComponent({ options, handler, field, disable, defaultSelected, value }) {
 	return (
 		<select
-			className={`RoundedRect SelectCombo ${disable ? 'Disabled' : ''}`}
-			onChange={(e) => handler(field, e.target.value, e)}
+			className={`RoundedRect SelectCombo ${disable ? "Disabled" : ""}`}
+			onChange={(e) => handler(e.target.value, "")}
 			disabled={disable}
-			value={defaultSelected}
-		>
+			value={defaultSelected}>
 			{options &&
 				options.map((option, index) => {
 					return (

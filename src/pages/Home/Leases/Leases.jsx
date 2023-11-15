@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SectionContext } from "../../../context/SectionContext.jsx";
-import useCountResults from "../../../hooks/useCountResults.jsx";
 import useInfinitScrolling from "../../../hooks/useInfiniteScrolling.jsx";
 import usePopulateTable from "../../../hooks/usePopulateTable.jsx";
 import "./Leases.scss";
@@ -14,7 +13,6 @@ import Error from "../../../components/HomePage/MainContainer/Error/Error.jsx";
 import Loading from "../../../components/HomePage/MainContainer/Loading/Loading.jsx";
 import SearchBar from "../../../components/HomePage/MainContainer/SearchBar/SearchBar.jsx";
 import SelectComponent from "../../../components/HomePage/MainContainer/Select/SelectComponent.jsx";
-import { ModalAlert } from "../../../components/Modals/Alerts/Alerts.jsx";
 
 function Leases() {
 	//Maneja el título de la barra de navegación superior
@@ -29,24 +27,14 @@ function Leases() {
 
 	//Variables que utiliza el hook personalizado que se encarga de pupular la tableview
 	//Varibles used by the personalized hook that is in charge of pupulating the tableview
+	const [isActive, setIsActive] = useState(false);
 	const [validInput, setvalidInput] = useState(true);
 	const [pageNumber, setPageNumber] = useState(1);
-	const [isActive, setIsActive] = useState("false");
-	const [queryOption, setQueryOption] = useState(id ? "borrower_name" : "lending_id");
-	const [query, setQuery] = useState(id);
-	const [datesToFilter, setDatesToFilter] = useState([]);
-
-	//Obtiene la cantidad de resultados posibles
-	//Gets the amount of results posible
-	const {
-		loading: countLoading,
-		error: countError,
-		countData: countData,
-	} = useCountResults("/api/lendings/getCount", isActive, queryOption, query, datesToFilter);
+	const [query, setQuery] = useState({});
 
 	//Se encarga de las solicitudes http al servidor para completar la tabla
 	//Takes care of the http requests to the server to pupulate the table
-	const { loading, error, tableData, hasMore } = usePopulateTable("get", "/lease", pageNumber, isActive, queryOption, query, datesToFilter);
+	const { loading, error, tableData, hasMore } = usePopulateTable("/lease", pageNumber, query);
 
 	//se ocupa del último elemento representado en la lista, por lo que una vez que choca con la parte visible del navegador, envía una señal para enviar otra solicitud al servidor
 	//Takes care of the las element rendered on the list so once it collides with the viewable part of the browser sends a signal to send another request to the server
@@ -54,41 +42,9 @@ function Leases() {
 
 	//Maneja las funciones de busqueda
 	//Handles search when te user types into the input component
-	const handleSearch = (e) => {
-		const value = e.target.value;
-		// Las siguientes declaraciones if manejan si el usuario escribe letras en lugar de números cuando intenta buscar por ID
-		//The following if statements handles if the user types letters instead of numbers when tries to search by ID
-		if (queryOption == "lending_id" && !onlyNumbers.test(value) && value != "") {
-			e.target.textContent = value.match(/\d+/g);
-			setvalidInput(false);
-		} else {
-			setvalidInput(true);
-			setPageNumber(1);
-			setQuery(value);
-		}
-	};
-
-	//Maneja la opción de búsqueda (por ejemplo: buscar por ID, por nombre del prestatario, etc.)
-	//Handles the search option (for example: search by ID, by BorrowerName, etc)
-	const handleQueryOption = (field, value, e) => {
-		if (value == "lending_id" && !onlyNumbers.test(query) && query != "") {
-			ModalAlert("error", "La entrada no es válida", true);
-			setQueryOption((prev) => {
-				e.target.value = prev;
-				return prev;
-			});
-		} else {
-			setvalidInput(true);
-			setPageNumber(1);
-			setQueryOption(value);
-			setQuery(inputSearchRef.current.value);
-		}
-	};
-
-	//Maneja los rangos de fechas seccionados
-	//Handles the range of dates selected
-	const handleDateRanges = (e) => {
-		setDatesToFilter(e);
+	const handleQuery = (field, value) => {
+		console.log(field, value);
+		setQuery((prev) => ({ [field]: value, ["lease_start_date"]: prev["lease_start_date"] }));
 		setPageNumber(1);
 	};
 
@@ -108,15 +64,18 @@ function Leases() {
 		}
 	};
 
+	useEffect(() => {
+		console.log(query);
+	}, [query]);
+
 	const inputSearchRef = useRef(null);
 
 	//Arreglo de opciones que alimenta al componente de selección #SelectComponent
 	//Array of options that feed the #SelectComponent
 	const queryOptions = [
-		{ value: "lending_id", label: "ID" },
-		{ value: "borrower_name", label: "Prestatario" },
-		{ value: "user_name", label: "Prestador" },
-		{ value: "lending_remarks", label: "Notas" },
+		{ value: "property_name", label: "Nombre/Propiedad" },
+		{ value: "tenant_name", label: "Arrendatario" },
+		{ value: "lease_start_date", label: "fecha de inicio" },
 	];
 
 	return (
@@ -124,28 +83,30 @@ function Leases() {
 			<div className='ChildMaster'>
 				<div className='tableHeader Lendings'>
 					<div className='TabOptions'>
-						<h2 className={isActive == "false" ? "active" : ""} onClick={() => handleTabActive("false")}>
+						<h2 className={!isActive ? "active" : ""} onClick={() => handleTabActive(false)}>
 							Activos
 						</h2>
-						<h2 className={isActive == "true" ? "active" : ""} onClick={() => handleTabActive("true")}>
+						<h2 className={isActive ? "active" : ""} onClick={() => handleTabActive(true)}>
 							Inactivos
 						</h2>
 					</div>
 					<div className='SearchOptions'>
 						<div>
-							<p>{!countError && !countLoading && countData && validInput ? `${countData} resultado(s)` : `					`}</p>
+							<p>{!error && !loading && tableData.totalCount && validInput ? `${tableData.totalCount} resultado(s)` : `					`}</p>
 						</div>
 
 						<div>
-							<CustomDateRangePicker handleRange={handleDateRanges} />
-							<SelectComponent options={queryOptions} handler={handleQueryOption} defaultSelected={queryOption} />
+							<CustomDateRangePicker
+								handleRange={(e) => {
+									handleQuery("lease_start_date", e);
+								}}
+							/>
+							<SelectComponent options={queryOptions} handler={handleQuery} />
 							<SearchBar
-								handler={handleSearch}
+								handler={(e) => handleQuery(Object.keys(query)[0], e.target.value)}
 								validInput={validInput}
-								idInput={handleValidId}
-								refn={inputSearchRef}
-								defaultValue={id || ""}
 								visible={true}
+								value={query[Object.keys(query)[0]]}
 							/>
 						</div>
 					</div>
@@ -153,14 +114,14 @@ function Leases() {
 
 				<div className='TableScroll'>
 					<div className={`tableContainer ShowTableAnim ${tableData.length > 0 ? "Active" : ""}`}>
-						{tableData
+						{tableData?.data
 							/* .sort(
 								(a, b) =>
 									new Date(b.lending_borrowdate) -
 									new Date(a.lending_borrowdate)
 							) */
-							.map((object) => {
-								if (tableData.length === tableData.lastIndexOf(object) + 1) {
+							?.map((object) => {
+								if (tableData?.data?.length === tableData?.data?.lastIndexOf(object) + 1) {
 									return (
 										<div key={object.lending_id} ref={lastElementRef}>
 											<LendingsTableRow data={object} />
@@ -173,7 +134,7 @@ function Leases() {
 
 						<div>{loading && <Loading />}</div>
 						<div>{error && <Error />}</div>
-						<div>{!loading && !error && tableData.length < 1 && <Error noResults={tableData.length < 1} />}</div>
+						<div>{!loading && !error && tableData?.data?.length < 1 && <Error noResults={tableData?.data?.length < 1} />}</div>
 					</div>
 				</div>
 				<div style={{ height: "100px" }}></div>

@@ -11,4 +11,8 @@ export const httpErrors = {
 		message: "Creado correctamente",
 		icon: "success",
 	},
+	409: {
+		message: "ID duplicado",
+		icon: "error",
+	},
 };

@@ -39,7 +39,7 @@
 }
 
 .RoundedRect.ImageButton::before {
-	content: '';
+	content: "";
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -132,5 +132,51 @@
 
 	.RoundedRect.ImageButton .imageTextContainer .Image2 {
 		width: 120%;
+	}
+}
+
+.mockPendingPatCard {
+	border-radius: 2rem;
+	overflow: hidden;
+
+	&::before {
+		content: "¡Pago Atrasado!";
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100%;
+		color: white;
+		text-align: end;
+		padding-right: 1rem;
+		font-weight: 700;
+		font-size: 1.4rem;
+		border-radius: 25px;
+		background: linear-gradient(180deg, rgba(0, 0, 0) -15px, transparent 65%);
+	}
+}
+
+.animateCard {
+	opacity: 0;
+	@for $i from 1 through 10 {
+		&:nth-child(#{$i}) {
+			animation: slideFromBottom 1s cubic-bezier(0.23, 1, 0.32, 1) #{$i * 0.1s} forwards;
+		}
+	}
+}
+
+/* Animation for the cards */
+@keyframes slideFromBottom {
+	0% {
+		display: flex;
+		scale: 0;
+		transform: translateY(100%);
+	}
+	30% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(0);
+		scale: 1;
+		opacity: 1;
 	}
 }

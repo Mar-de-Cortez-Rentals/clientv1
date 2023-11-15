@@ -169,7 +169,7 @@ function InventoryTableRow({ data, selectedItems, handleSelected }) {
 							<div className='col-md'>
 								<p>ID: {rowData?._id}</p>
 								<h3 contentEditable={isEditable} onBlur={(e) => handleEditData("item_type", e)} suppressContentEditableWarning onPaste={handlePaste}>
-									{rowData?.type}
+									{rowData?.name}
 								</h3>
 							</div>
 							<div className='col-md'>
@@ -222,13 +222,13 @@ function InventoryTableRow({ data, selectedItems, handleSelected }) {
 
 				<div className={`Expandible ${expand || isDialogOpen || isEditable ? "Show" : ""}`}>
 					<div>
-						<h4>Dirección</h4>
+						<h4>Tipo de propiedad</h4>
 						<p
 							contentEditable={isEditable}
 							onBlur={(e) => handleEditData("item_description", e)}
 							suppressContentEditableWarning
 							onPaste={handlePaste}>
-							{rowData.address}
+							{rowData.type}
 						</p>
 					</div>
 					<div>

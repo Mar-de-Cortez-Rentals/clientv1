@@ -21,49 +21,42 @@ function Properties() {
 	//Maneja el título de la barra de navegación superior
 	//Handles the title for the upper navbar
 	const { handleTitle } = useContext(SectionContext);
-	useEffect(() => {
-		handleTitle("Propiedades");
-		setPageNumber(1);
-	}, []);
 
 	//Variables que utiliza el hook personalizado que se encarga de pupular la tableview
 	//Varibles used by the personalized hook that is in charge of pupulating the tableview
 	const [pageNumber, setPageNumber] = useState(1);
-	const [isAvailable, setIsAvailable] = useState("");
-	const [queryOption, setQueryOption] = useState("item_type");
-	const [query, setQuery] = useState("");
+	const [query, setQuery] = useState({
+		name: "",
+	});
 	const [selectedItems, setSelectedItems] = useState([]);
 	const [showSelected, setShowSelected] = useState(false);
 	const [hideComponente, setHideComponente] = useState(false);
-
 	const { user } = useAuthContext();
+
+	useEffect(() => {
+		handleTitle("Propiedades");
+		setPageNumber(1);
+		console.log(query);
+	}, [query]);
 
 	//Se encarga de las solicitudes http al servidor para completar la tabla
 	//Takes care of the http requests to the server to pupulate the table
-	const { loading, error, tableData, hasMore } = usePopulateTable("get", "/property", pageNumber, isAvailable, queryOption, query);
+	const { loading, error, tableData, hasMore } = usePopulateTable("/property", pageNumber, query);
 
 	//se ocupa del último elemento representado en la lista, por lo que una vez que choca con la parte visible del navegador, envía una señal para enviar otra solicitud al servidor
 	//Takes care of the las element rendered on the list so once it collides with the viewable part of the browser sends a signal to send another request to the server
 	const lastElementRef = useInfinitScrolling(loading, hasMore, setPageNumber);
 
-	//Maneja las funciones de busqueda
-	//Handles search when te user types into the input component
-	const handleSearch = (e) => {
-		setQuery(e.target.value);
-		setPageNumber(1);
-	};
-
 	//Maneja la opción de búsqueda (por ejemplo: buscar por ID, por nombre del prestatario, etc.)
 	//Handles the search option (for example: search by ID, by BorrowerName, etc)
 	const handleQueryOption = (field, value) => {
-		setQueryOption(value);
+		console.log(field, value);
+		setQuery((prev) => ({ [field]: value }));
 		setPageNumber(1);
 	};
 
-	//Maneja los materiales disponibles y no disponibles, para que el usuario pueda elegir qué lista quiere ver
-	//Handles the available and non-available items, so the user can choose which list wants to see
-	const handleAvailability = (field, value) => {
-		setIsAvailable(value);
+	const handleSearch = (e) => {
+		setQuery((prev) => ({ [Object.keys(prev)[0]]: e.target.value }));
 		setPageNumber(1);
 	};
 
@@ -123,9 +116,9 @@ function Properties() {
 								</button>
 							)}
 							<p>Buscar por</p>
-							<SelectComponent options={availabityOptions} handler={handleAvailability} />
+							{/* <SelectComponent options={availabityOptions} handler={() => {}} /> */}
 							<SelectComponent options={queryOptions} handler={handleQueryOption} />
-							<SearchBar handler={handleSearch} validInput={true} visible={true} />
+							<SearchBar handler={handleSearch} validInput={true} visible={true} value={query[Object.keys(query)[0]]} />
 						</div>
 					</div>
 
