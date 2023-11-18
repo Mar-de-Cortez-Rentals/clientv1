@@ -7,6 +7,37 @@ import { socket } from "../../../socket";
 import "./Dashboard.scss";
 
 function Dashboard() {
+	const MockData = () => {
+		const data = [
+			{
+				tenant: { first_name: "Juan", last_name: "Perez", phone: "1234567890", email: "" },
+				admin: { first_name: "Hermana ", last_name: "Galvez 1" },
+				date: new Date(),
+				index: 0,
+			},
+			{
+				tenant: { first_name: "Lidia", last_name: "Susano", phone: "1234567890", email: "" },
+				admin: { first_name: "Hermana ", last_name: "Galvez 2" },
+				date: new Date(),
+				index: 1,
+			},
+			{
+				tenant: { first_name: "Frank", last_name: "CInco", phone: "1234567890", email: "" },
+				admin: { first_name: "Hermana ", last_name: "Galvez 3" },
+				date: new Date(),
+				index: 2,
+			},
+			{
+				tenant: { first_name: "Tulio", last_name: "Palazueloz", phone: "1234567890", email: "" },
+				admin: { first_name: "Hermana ", last_name: "Galvez 4" },
+				date: new Date(),
+				index: 3,
+			},
+		];
+
+		return data[Math.floor(Math.random() * data.length)];
+	};
+
 	const [data, setData] = useState([]);
 	//Maneja el título de la barra de navegación superior
 	//Handles the title for the upper navbar
@@ -168,6 +199,7 @@ function Dashboard() {
 				<div className='CarouselContainer p-4'>
 					<div className='row'>
 						{data.map((item, index) => {
+							console.log(item);
 							return (
 								<div className='col-md-3' key={index}>
 									<div className={`card shadow mockPendingPatCard animateCard`}>
@@ -205,37 +237,6 @@ const MockImages = () => {
 		"https://http2.mlstatic.com/D_NQ_NP_786367-MLM69746404598_062023-O.webp",
 		"https://gpvivienda.com/blog/wp-content/uploads/2023/03/ralph-ravi-kayden-mR1CIDduGLc-unsplash-1-1-1024x680.jpg",
 		"https://fincaraiz.com.co/blog/wp-content/uploads/2022/08/casas-modernas-1-1920x1130.jpg",
-	];
-
-	return data[Math.floor(Math.random() * data.length)];
-};
-
-const MockData = () => {
-	const data = [
-		{
-			tenant: { first_name: "Juan", last_name: "Perez", phone: "1234567890", email: "" },
-			admin: { first_name: "Hermana ", last_name: "Galvez 1" },
-			date: new Date(),
-			index: 0,
-		},
-		{
-			tenant: { first_name: "Lidia", last_name: "Susano", phone: "1234567890", email: "" },
-			admin: { first_name: "Hermana ", last_name: "Galvez 2" },
-			date: new Date(),
-			index: 1,
-		},
-		{
-			tenant: { first_name: "Frank", last_name: "CInco", phone: "1234567890", email: "" },
-			admin: { first_name: "Hermana ", last_name: "Galvez 3" },
-			date: new Date(),
-			index: 2,
-		},
-		{
-			tenant: { first_name: "Tulio", last_name: "Palazueloz", phone: "1234567890", email: "" },
-			admin: { first_name: "Hermana ", last_name: "Galvez 4" },
-			date: new Date(),
-			index: 3,
-		},
 	];
 
 	return data[Math.floor(Math.random() * data.length)];

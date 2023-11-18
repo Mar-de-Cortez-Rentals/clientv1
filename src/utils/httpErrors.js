@@ -15,4 +15,8 @@ export const httpErrors = {
 		message: "ID duplicado",
 		icon: "error",
 	},
+	500: {
+		message: "Ocurrio un error",
+		icon: "error",
+	},
 };

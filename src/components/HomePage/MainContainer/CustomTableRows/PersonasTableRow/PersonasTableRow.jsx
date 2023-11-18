@@ -165,10 +165,6 @@ function PersonasTableRow({ data, keepExpand, lend, handleConfirmLending }) {
 
 					<div className='PersonaMoreInfo'>
 						<p>
-							{rowData.borrower_type == "Estudiante" && `Número de control:`}
-							{rowData.borrower_type == "Docente" && `Número de empleado:`}
-							{rowData.borrower_type == "Administrativo" && `Número de empleado:`}
-							{rowData.borrower_type == "Externo" && `ID:`}{" "}
 							<span
 								onInput={(e) => handleValidId(e)}
 								contentEditable={isEditing}
@@ -196,14 +192,16 @@ function PersonasTableRow({ data, keepExpand, lend, handleConfirmLending }) {
 
 			<div className={`Personas Expandible ${keepExpand || expand || isEditing ? "Show" : ""}`}>
 				<div>
-					<h3>Notas</h3>
-					<p
-						contentEditable={isEditing}
-						onBlur={(e) => handleEditData("borrower_notes", e.target.textContent)}
-						suppressContentEditableWarning
-						onPaste={handlePaste}>
-						{rowData.borrower_notes}
-					</p>
+					<h5>Empleo:</h5>
+					<span>{rowData.contact_info.job}</span>
+				</div>
+				<div>
+					<h5>Direccion de empleo:</h5>
+					<span>{rowData.contact_info.job_address}</span>
+				</div>
+				<div>
+					<h5>Numero de trabajo:</h5>
+					<span>{rowData.contact_info.job_phone}</span>
 				</div>
 
 				<div className='InteractiveButtons Lendings'>
@@ -214,7 +212,7 @@ function PersonasTableRow({ data, keepExpand, lend, handleConfirmLending }) {
 							</Link>
 						</p>
 					)}
-					{user.user_type == "normal" && (
+					{user.userType == "admin" && (
 						<>
 							{/* 	<button className='DeleteButton' onClick={handleDelete}>
 								Eliminar

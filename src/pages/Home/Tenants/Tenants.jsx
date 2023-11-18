@@ -46,7 +46,7 @@ function Tenants() {
 
 	//Se encarga de las solicitudes http al servidor para completar la tabla
 	//Takes care of the http requests to the server to pupulate the table
-	const { loading, error, tableData, hasMore } = usePopulateTable("/tenant", pageNumber, query);
+	const { loading, error, tableData, hasMore, setTableData } = usePopulateTable("/tenant", pageNumber, query);
 
 	//se ocupa del último elemento representado en la lista, por lo que una vez que choca con la parte visible del navegador, envía una señal para enviar otra solicitud al servidor
 	//Takes care of the las element rendered on the list so once it collides with the viewable part of the browser sends a signal to send another request to the server
@@ -74,9 +74,7 @@ function Tenants() {
 		const element = await PersonaFormDialog("Nuevo Arrendatario", PersonaFullForm, PersonaFields, ContactFields);
 		console.log(element);
 		const resData = await CreateReq("/tenant", element, user.token);
-		if (resData) {
-			setPageNumber(1);
-		}
+		setTableData([resData, ...tableData]);
 	};
 
 	const handleConfirmLending = async (borrower_id) => {
