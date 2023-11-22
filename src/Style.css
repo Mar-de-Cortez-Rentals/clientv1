@@ -1,5 +1,5 @@
 :root,
-[data-theme="light"] {
+[data-theme='light'] {
 	--gradient-accent: #35a5b1;
 	--inactive-fg: #5b5f6a;
 	--active-fg: #292d32;
@@ -13,7 +13,7 @@
 	--transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
 	--gradient-accent: linear-gradient(226.32deg, #62d4e0 31%, #35a5b1 78.06%);
 	--inactive-fg: #cfcfcf;
 	--active-fg: #ffffff;
@@ -25,7 +25,7 @@
 }
 
 * {
-	font-family: "Baloo Thambi 2", roboto, sans-serif;
+	font-family: 'Baloo Thambi 2', roboto, sans-serif;
 	padding: 0;
 	margin: 0;
 }
