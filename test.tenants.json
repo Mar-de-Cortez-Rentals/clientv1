@@ -1,0 +1,162 @@
+[{
+  "_id": {
+    "$oid": "6554e707c824f5d0932bdda8"
+  },
+  "first_name": "Darien Alejandro",
+  "last_name": "Verdugo Reyna",
+  "contact_info": {
+    "phone": "6381076853",
+    "email": "admin@admin.com",
+    "job": "sda",
+    "job_phone": "6381076853",
+    "job_address": "Av. Julián Bustamante y Calle Miguel Hidalgo #129"
+  },
+  "move_in_date": {
+    "$date": "2023-11-15T15:43:03.381Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554e757c824f5d0932bddae"
+  },
+  "first_name": "sdadadadda",
+  "last_name": "adadad",
+  "contact_info": {
+    "phone": "6381076853",
+    "email": "adada@gmail.co",
+    "job": "w2ewe",
+    "job_phone": "2323232332",
+    "job_address": "Av. Julián Bustamante y Calle Miguel Hidalgo #129"
+  },
+  "move_in_date": {
+    "$date": "2023-11-15T15:44:23.850Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554e77bc824f5d0932bddb6"
+  },
+  "first_name": "a",
+  "last_name": "a",
+  "contact_info": {
+    "phone": "656556",
+    "email": "afsfa@gmail.com",
+    "job": "gyasgadhj",
+    "job_phone": "81647236",
+    "job_address": "qafjashgfe"
+  },
+  "move_in_date": {
+    "$date": "2023-11-15T15:44:59.589Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554e793c824f5d0932bddba"
+  },
+  "first_name": "Darien Alejandro",
+  "last_name": "Verdugo Reyna",
+  "contact_info": {
+    "phone": "6381076853",
+    "email": "admin@admin.com",
+    "job": "a",
+    "job_phone": "6381076853",
+    "job_address": "Av. Julián Bustamante y Calle Miguel Hidalgo #129"
+  },
+  "move_in_date": {
+    "$date": "2023-11-15T15:45:23.393Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554e7a6c824f5d0932bddc0"
+  },
+  "first_name": "Darien Alejandro",
+  "last_name": "Verdugo Reyna",
+  "contact_info": {
+    "phone": "6381076853",
+    "email": "6381076853",
+    "job": "aefqew",
+    "job_phone": "6381076853",
+    "job_address": "Av. Julián Bustamante y Calle Miguel Hidalgo #129"
+  },
+  "move_in_date": {
+    "$date": "2023-11-15T15:45:42.466Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554e7f6c824f5d0932bddc8"
+  },
+  "first_name": "Darien Alejandro",
+  "last_name": "Verdugo Reyna",
+  "contact_info": {
+    "phone": "6381076853",
+    "email": "admin@admin.com",
+    "job": "asda",
+    "job_phone": "6381076853",
+    "job_address": "Av. Julián Bustamante y Calle Miguel Hidalgo #129"
+  },
+  "move_in_date": {
+    "$date": "2023-11-15T15:47:02.864Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554e842c824f5d0932bddd0"
+  },
+  "first_name": "Juanito",
+  "last_name": "Perez",
+  "contact_info": {
+    "phone": "2232323",
+    "email": "admin@admin.com",
+    "job": "safa",
+    "job_phone": "6381076853",
+    "job_address": "Av. Julián Bustamante y Calle Miguel Hidalgo #129"
+  },
+  "move_in_date": {
+    "$date": "2023-11-15T15:48:18.769Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554e8d8c824f5d0932bddd4"
+  },
+  "first_name": "juanitop banana",
+  "last_name": "a",
+  "contact_info": {
+    "phone": "328378",
+    "email": "alexhid14@gmail.com",
+    "job": "qwqw",
+    "job_phone": "23123",
+    "job_address": "qjnkaf"
+  },
+  "move_in_date": {
+    "$date": "2023-11-15T15:50:48.475Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655d744a49243751c958281d"
+  },
+  "first_name": "Darien Alejandro",
+  "last_name": "Verdugo Reyna",
+  "contact_info": {
+    "phone": "6381076853",
+    "email": "admin@admin.com",
+    "job": "wead",
+    "job_phone": "adad",
+    "job_address": "Av. Julián Bustamante y Calle Miguel Hidalgo #129"
+  },
+  "move_in_date": {
+    "$date": "2023-11-22T03:23:54.135Z"
+  },
+  "__v": 0
+}]

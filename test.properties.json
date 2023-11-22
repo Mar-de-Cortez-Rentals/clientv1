@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "6554f6293d9e6f01c2014cac"
+  },
+  "name": "Casa",
+  "address": "Las conchas",
+  "type": "Casa",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554f69025d55063358c5755"
+  },
+  "name": "Casa",
+  "address": "Las conchas",
+  "type": "Casa",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554f6c625d55063358c575d"
+  },
+  "name": "Kothari Perms",
+  "address": "1",
+  "type": "casa",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6554f6ddb5371f8d7e602d96"
+  },
+  "name": "Casa",
+  "address": "Las conchas",
+  "type": "Casa",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655d741f49243751c9582817"
+  },
+  "name": "Casa esplendida",
+  "address": "La 13",
+  "type": "casa",
+  "__v": 0
+}]
