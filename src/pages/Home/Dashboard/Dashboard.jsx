@@ -1,13 +1,11 @@
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import es from 'date-fns/locale/es';
-import parseISO from 'date-fns/parseISO';
+import axios from 'axios';
+import { formatDistanceToNow, parseISO } from 'date-fns';
+import { es } from 'date-fns/locale';
 import { useContext, useEffect, useState } from 'react';
 import { SectionContext } from '../../../context/SectionContext';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { socket } from '../../../socket';
 import './Dashboard.scss';
-
-import { API_URL } from '../../../../config';
 
 function Dashboard() {
 	const MockData = () => {
@@ -48,17 +46,16 @@ function Dashboard() {
 	useEffect(() => {
 		handleTitle('Bienvenid@');
 
-		fetch(`${API_URL}/property/0/4`)
+		axios
+			.get('http://localhost:3000/property/0/4')
 			.then((res) => {
-				res.json().then((data) => {
-					setData(
-						data.map((item) => {
-							console.log({ property: item, ...MockData() });
+				setData(
+					res.data.map((item) => {
+						console.log({ property: item, ...MockData() });
 
-							return { property: item, ...MockData() };
-						})
-					);
-				});
+						return { property: item, ...MockData() };
+					})
+				);
 			})
 			.catch((err) => console.log(err));
 
@@ -109,13 +106,13 @@ function Dashboard() {
 						{fooEvents.map((item, index) => {
 							return (
 								<div className={`col-md-3 px-4 pt-2 animateCard`} style={{ background: 'var(--tertiary-bg)', borderRadius: '2rem' }} key={index}>
-									<div className='col-md pb-3	'>
+									<div className='col-md pb-3'>
 										<div className='row'>
 											<img
 												src={MockImages()}
 												className='col-md shadow p-0'
 												alt='...'
-												style={{ borderRadius: '1rem', height: '100px', objectFit: 'cover', width: '100%' }}
+												style={{ borderRadius: '1rem', height: '100px', objectFit: 'cover' }}
 											/>
 											<div className='col-md pt-3'>
 												<h5 className='card-title'>
@@ -158,8 +155,6 @@ function Dashboard() {
 					</div>
 				</div>
 			</div>
-
-			<div className='DashboardContainer'></div>
 
 			<div className='DashboardContainer'>
 				<div className='CarouselContainer p-4'>

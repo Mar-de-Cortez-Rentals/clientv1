@@ -39,7 +39,7 @@
 }
 
 .RoundedRect.ImageButton::before {
-	content: "";
+	content: '';
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -140,7 +140,7 @@
 	overflow: hidden;
 
 	&::before {
-		content: "¡Pago Atrasado!";
+		content: '¡Pago Atrasado!';
 		position: absolute;
 		top: 0;
 		right: 0;
